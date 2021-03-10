@@ -58,10 +58,20 @@ DROP COLUMN column_name;
 alter table person drop column email;
 
 
-ALTER TABLE person RENAME COLUMN dateofbirth TO dob;
+
+alter table person add email varchar(50);
 -- check for changes are successfull/not
 desc person;
 
+alter table person add phonenum  varchar(50) ;
+-- update without using primary key in where clause or force update
+SET SQL_SAFE_UPDATES = 1;
+alter table person rename column phonenum TO phnum;
+alter table person ADD PRIMARY KEY (phnum);
+alter table person drop column email;
+alter table person drop column salary;
+alter table person rename column dateofbirth TO dob;
+alter table person drop column salary;
 
 /* 
 Make sure you have admin privilege before dropping any database.
@@ -82,6 +92,14 @@ TO DISK = 'filepath';
 
 BACKUP DATABASE Customers TO DISK = 'D:\backups\CustomersDB.bak';
 
+-- delete all the record from  the table
 
+delete from person;
+
+-- select all the records from the table
+select * from person;
+
+-- update the table using where clause
+UPDATE person SET dob='1991-02-03' where phnum="9988776655";
 
 
